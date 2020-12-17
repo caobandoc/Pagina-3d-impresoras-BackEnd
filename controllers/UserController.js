@@ -32,10 +32,12 @@ exports.login = (req, res) => {
 
 exports.register = async(req, res, next) => {
     try {
+        //transformando la contraseña
         req.body.password = await bcrypt.hashSync(req.body.password, 10);
+        //guardando en base de datos
         const user = await User.create(req.body);
         res.status(200).json(user);
-    } catch (e) {
+    } catch (error) {
         res.status(500).send({
             message: 'Error ->' + error
         })
@@ -45,13 +47,30 @@ exports.register = async(req, res, next) => {
 
 exports.listar = async(req, res, next) => {
     try {
-        // const user = await User.findAll();
-        // res.status(200).json(user);
         db.Usuario.findAll().then(users => res.status(200).json(users));
-    } catch (e) {
+    } catch (error) {
         res.status(500).send({
             message: 'Error ->' + error
         })
         next(error);
     }
 };
+
+exports.update = async(req, res, next) => {
+    try {
+        const user = await db.Usuario.findOne({
+            where: {
+                email: req.body.email
+            }
+        })
+        if (user) {
+            const user = await db.Usuario.update({ nombre: req.body.nombre }, { where: { email: req.body.email } })
+        };
+        res.status(200).json(users)
+    } catch (error) {
+        res.status(500).send({
+            message: 'Error ->' + error
+        })
+        next(error);
+    }
+}

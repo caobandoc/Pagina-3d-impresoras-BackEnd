@@ -5,6 +5,7 @@ module.exports = {
         return queryInterface.bulkInsert('Categoria', [{
             nombre: 'Categoria_test',
             descripcion: 'lorem limsus test',
+            estado: 1,
             createdAt: new Date(),
             updatedAt: new Date()
 
