@@ -22,7 +22,7 @@ exports.add = async(req, res, next) => {
         if (!aux) {
             req.body.estado = 1;
             //crea la nueva categoria
-            const categoria = await Categoria.create(req.body);
+            const categoria = await db.Categoria.create(req.body);
             res.status(200).json(categoria);
         } else {
             res.status(401).send('Ya existe');
@@ -38,17 +38,12 @@ exports.add = async(req, res, next) => {
 
 exports.update = async(req, res, next) => {
     try {
-        const categoria = await db.Categoria.findOne({
-            where: {
-                nombre: req.body.nombre
-            }
-        })
-        if (categoria) {
-            const categoria = await db.Categoria.update({
-                nombre: req.body.nombre,
-                descripcion: req.body.descripcion
-            }, { where: { nombre: req.body.nombre } })
-        };
+        const categoria = await db.Categoria.update({
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            codigo: req.body.codigo
+        }, { where: { id: req.body.id } });
+        res.status(200).json(categoria);
     } catch (error) {
         res.status(500).send({
             message: 'Error ->' + error
@@ -59,16 +54,10 @@ exports.update = async(req, res, next) => {
 
 exports.activate = async(req, res, next) => {
     try {
-        const categoria = await db.Categoria.findOne({
-            where: {
-                nombre: req.body.nombre
-            }
-        })
-        if (categoria) {
-            const categoria = await db.Categoria.update({
-                estado: 1
-            }, { where: { nombre: req.body.nombre } })
-        };
+        const categoria = await db.Categoria.update({
+            estado: 1
+        }, { where: { id: req.body.id } });
+        res.status(200).json(categoria);
     } catch (error) {
         res.status(500).send({
             message: 'Error ->' + error
@@ -79,16 +68,10 @@ exports.activate = async(req, res, next) => {
 
 exports.deactivate = async(req, res, next) => {
     try {
-        const categoria = await db.Categoria.findOne({
-            where: {
-                nombre: req.body.nombre
-            }
-        })
-        if (categoria) {
-            const categoria = await db.Categoria.update({
-                estado: 0
-            }, { where: { nombre: req.body.nombre } })
-        };
+        const categoria = await db.Categoria.update({
+            estado: 0
+        }, { where: { id: req.body.id } });
+        res.status(200).json(categoria);
     } catch (error) {
         res.status(500).send({
             message: 'Error ->' + error

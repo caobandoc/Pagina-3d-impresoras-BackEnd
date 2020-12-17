@@ -20,6 +20,12 @@ module.exports = {
             estado: {
                 type: Sequelize.INTEGER
             },
+            precio_venta: {
+                type: Sequelize.INTEGER
+            },
+            stock: {
+                type: Sequelize.INTEGER
+            },
             categoriaId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,

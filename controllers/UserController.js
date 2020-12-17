@@ -15,14 +15,14 @@ exports.login = (req, res) => {
         if (!passwordIsValid) {
             return res.status(401).send({
                 auth: false,
-                accessToken: null,
+                tokenReturn: null,
                 reason: "Invalid Password!"
             });
         }
         const token = services.encode(user);
         res.status(200).send({
-            auth: true,
-            accessToken: token,
+            user: user,
+            tokenReturn: token,
             // user: user
         });
     }).catch(err => {
