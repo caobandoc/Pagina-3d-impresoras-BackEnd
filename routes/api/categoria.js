@@ -6,18 +6,16 @@ const auth = require('../../middlewares/auth');
 const router = routerx();
 
 //api/categoria/list
-router.get('/list', auth.verifyUsuario, categoriaController.list);
-
 //api/categoria/add
-router.post('/add', auth.verifyUsuario, categoriaController.add);
-
 //api/categoria/update
-router.put('/update', auth.verifyUsuario, categoriaController.update);
-
 //api/categoria/activate
-router.put('/activate', auth.verifyUsuario, categoriaController.activate);
-
 //api/categoria/deactivate
+router.get('/list', auth.verifyUsuario, categoriaController.list);
+router.post('/add', auth.verifyUsuario, categoriaController.add);
+router.put('/update', auth.verifyUsuario, categoriaController.update);
+router.put('/activate', auth.verifyUsuario, categoriaController.activate);
 router.put('/deactivate', auth.verifyUsuario, categoriaController.deactivate);
+
+//auth.verifyUsuario,
 
 module.exports = router;
