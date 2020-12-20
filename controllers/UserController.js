@@ -35,7 +35,8 @@ exports.register = async(req, res, next) => {
         //transformando la contraseña
         req.body.password = await bcrypt.hashSync(req.body.password, 10);
         //guardando en base de datos
-        const user = await User.create(req.body);
+        console.log(req.body);
+        const user = await db.Usuario.create(req.body);
         res.status(200).json(user);
     } catch (error) {
         res.status(500).send({
@@ -64,9 +65,41 @@ exports.update = async(req, res, next) => {
             }
         })
         if (user) {
-            const user = await db.Usuario.update({ nombre: req.body.nombre }, { where: { email: req.body.email } })
+            const user = await db.Usuario.update({
+                nombre: req.body.nombre,
+                estado: req.body.estado,
+                rol: req.body.rol,
+            }, { where: { email: req.body.email } })
         };
-        res.status(200).json(users)
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(500).send({
+            message: 'Error ->' + error
+        })
+        next(error);
+    }
+}
+
+exports.activate = async(req, res, next) => {
+    try {
+        const user = await db.Usuario.update({
+            estado: 1
+        }, { where: { email: req.body.email } });
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).send({
+            message: 'Error ->' + error
+        })
+        next(error);
+    }
+}
+
+exports.deactivate = async(req, res, next) => {
+    try {
+        const user = await db.Usuario.update({
+            estado: 0
+        }, { where: { email: req.body.email } });
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).send({
             message: 'Error ->' + error

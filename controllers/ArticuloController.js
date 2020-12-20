@@ -30,7 +30,10 @@ exports.update = async(req, res, next) => {
         const articulo = await db.Articulo.update({
             codigo: req.body.codigo,
             nombre: req.body.nombre,
-            descripcion: req.body.descripcion
+            descripcion: req.body.descripcion,
+            precio_venta: req.body.precio_venta,
+            stock: req.body.stock,
+            categoriaId: req.body.categoriaId
         }, { where: { id: req.body.id } });
         res.status(200).json(articulo);
     } catch (error) {
