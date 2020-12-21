@@ -84,7 +84,7 @@ exports.activate = async(req, res, next) => {
     try {
         const user = await db.Usuario.update({
             estado: 1
-        }, { where: { email: req.body.email } });
+        }, { where: { id: req.body.id } });
         res.status(200).json(user);
     } catch (error) {
         res.status(500).send({
@@ -98,7 +98,7 @@ exports.deactivate = async(req, res, next) => {
     try {
         const user = await db.Usuario.update({
             estado: 0
-        }, { where: { email: req.body.email } });
+        }, { where: { id: req.body.id } });
         res.status(200).json(user);
     } catch (error) {
         res.status(500).send({
