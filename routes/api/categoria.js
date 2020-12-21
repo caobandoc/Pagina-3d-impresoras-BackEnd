@@ -10,11 +10,18 @@ const router = routerx();
 //api/categoria/update
 //api/categoria/activate
 //api/categoria/deactivate
-router.get('/list', auth.verifyUsuario, categoriaController.list);
-router.post('/add', auth.verifyUsuario, categoriaController.add);
-router.put('/update', auth.verifyUsuario, categoriaController.update);
-router.put('/activate', auth.verifyUsuario, categoriaController.activate);
-router.put('/deactivate', auth.verifyUsuario, categoriaController.deactivate);
+
+// router.get('/list', auth.verifyUsuario, categoriaController.list);
+// router.post('/add', auth.verifyUsuario, categoriaController.add);
+// router.put('/update', auth.verifyUsuario, categoriaController.update);
+// router.put('/activate', auth.verifyUsuario, categoriaController.activate);
+// router.put('/deactivate', auth.verifyUsuario, categoriaController.deactivate);
+
+router.get('/list', categoriaController.list);
+router.post('/add', categoriaController.add);
+router.put('/update', categoriaController.update);
+router.put('/activate', categoriaController.activate);
+router.put('/deactivate', categoriaController.deactivate);
 
 //auth.verifyUsuario,
 

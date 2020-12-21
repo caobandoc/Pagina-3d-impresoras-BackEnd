@@ -21,9 +21,9 @@ exports.login = (req, res) => {
         }
         const token = services.encode(user);
         res.status(200).send({
-            user: user,
+            auth: true,
             tokenReturn: token,
-            // user: user
+            user: user
         });
     }).catch(err => {
         res.status(500).send('Error -> ' + err);

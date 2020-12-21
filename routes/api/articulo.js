@@ -11,11 +11,17 @@ const router = routerx();
 //api/articulo/activate
 //api/articulo/deactivate
 
+// router.get('/list', articuloController.list);
+// router.post('/add', auth.verifyUsuario, articuloController.add);
+// router.put('/update', auth.verifyUsuario, articuloController.update);
+// router.put('/activate', auth.verifyUsuario, articuloController.activate);
+// router.put('/deactivate', auth.verifyUsuario, articuloController.deactivate);
+
 router.get('/list', articuloController.list);
-router.post('/add', auth.verifyUsuario, articuloController.add);
-router.put('/update', auth.verifyUsuario, articuloController.update);
-router.put('/activate', auth.verifyUsuario, articuloController.activate);
-router.put('/deactivate', auth.verifyUsuario, articuloController.deactivate);
+router.post('/add', articuloController.add);
+router.put('/update', articuloController.update);
+router.put('/activate', articuloController.activate);
+router.put('/deactivate', articuloController.deactivate);
 
 //auth.verifyUsuario,
 
