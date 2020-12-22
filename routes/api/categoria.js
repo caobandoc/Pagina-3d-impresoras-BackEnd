@@ -18,10 +18,10 @@ const router = routerx();
 // router.put('/deactivate', auth.verifyUsuario, categoriaController.deactivate);
 
 router.get('/list', categoriaController.list);
-router.post('/add', categoriaController.add);
-router.put('/update', categoriaController.update);
-router.put('/activate', categoriaController.activate);
-router.put('/deactivate', categoriaController.deactivate);
+router.post('/add', auth.verifyAlmacenero, categoriaController.add);
+router.put('/update', auth.verifyAlmacenero, categoriaController.update);
+router.put('/activate', auth.verifyAlmacenero, categoriaController.activate);
+router.put('/deactivate', auth.verifyAlmacenero, categoriaController.deactivate);
 
 //auth.verifyUsuario,
 
